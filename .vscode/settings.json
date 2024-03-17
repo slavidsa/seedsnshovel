@@ -1,0 +1,9 @@
+{
+    "python.pythonPath": "env\\Scripts\\python.exe",
+    "emmet.showSuggestionsAsSnippets": true,
+    "emmet.triggerExpansionOnTab": false,
+    "emmet.useInlineCompletions": true,
+    "django.snippets.use": true,
+    "django.i18n": true,
+    "vsintellicode.modelDownloadPath": ""
+}

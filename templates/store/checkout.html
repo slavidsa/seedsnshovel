@@ -1,0 +1,116 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<section class="ftco-section">
+    <div class="container">
+        <div class="row justify-content-center">
+            <main class="col-md-8">
+                <article class="card mb-4">
+                    <div class="card-body">
+                        <h4 class="card-title mb-4">Review cart</h4>
+                        <div class="row">
+                            {% for cart_item in cart_items %}
+                            <div class="col-md-6">
+                                <figure class="itemside  mb-4">
+                                    <div class="aside">
+                                        <img src="{{ cart_item.product.images.url }}" class="border img-sm" width="75" height="75">
+                                    </div>
+                                    <figcaption class="info">
+                                        <p class="card-text mb-0">{{ cart_item.product.product_name }}</p>
+                                                <span class="card-text mb-0">{{ cart_item.quantity }}x = &#8377;{{ cart_item.sub_total }}</span>
+                                                <p class="text-muted mb-0">&#8377;{{ cart_item.product.price }} each</p>
+
+                                    </figcaption>
+                                </figure>
+                            </div> <!-- col.// -->
+                            {% endfor %}
+                        </div> <!-- row.// -->
+                    </div> <!-- card-body.// -->
+                </article>
+
+                <article class="card mb-4">
+                    <div class="card-body">
+                        <h4 class="card-title mb-4">Billing Address</h4>
+                        <form action="{% url 'place_order' %}" method="POST">
+                            {% csrf_token %}
+                            <div class="row">
+                                <div class="form-group col-sm-6">
+                                    <label for="first_name">First name</label>
+                                    <input type="text" id="first_name" name="first_name" class="form-control" required>
+                                </div>
+                                <div class="form-group col-sm-6">
+                                    <label for="last_name">Last name</label>
+                                    <input type="text" id="last_name" name="last_name" class="form-control" required>
+                                </div>
+                                <div class="form-group col-sm-6">
+                                    <label for="email">Email</label>
+                                    <input type="email" id="email" name="email" class="form-control" required>
+                                </div>
+                                <div class="form-group col-sm-6">
+                                    <label for="phone">Phone Number</label>
+                                    <input type="text" id="phone" name="phone" class="form-control" value="+91" required>
+                                </div>
+                            </div>
+                            <h4 class="card-title mb-4">Delivery info</h4>
+                            <div class="row">
+                                <div class="form-group col-sm-6">
+                                    <label for="address_line_1">Address Line 1</label>
+                                    <input type="text" id="address_line_1" name="address_line_1" class="form-control" required>
+                                </div>
+                                <div class="form-group col-sm-6">
+                                    <label for="address_line_2">Address Line 2</label>
+                                    <input type="text" id="address_line_2" name="address_line_2" class="form-control" required>
+                                </div>
+                                <div class="form-group col-sm-4">
+                                    <label for="city">City</label>
+                                    <input type="text" id="city" name="city" class="form-control" required>
+                                </div>
+                                <div class="form-group col-sm-4">
+                                    <label for="state">State</label>
+                                    <input type="text" id="state" name="state" class="form-control" required>
+                                </div>
+                                <div class="form-group col-sm-4">
+                                    <label for="country">Country</label>
+                                    <input type="text" id="country" name="country" class="form-control" required>
+                                </div>
+                                <div class="form-group col-sm-12">
+                                    <label for="order_note">Order Note</label>
+                                    <textarea class="form-control" id="order_note" name="order_note" rows="2"></textarea>
+                                </div>
+                            </div>
+                           
+                    </div>
+                </article>
+            </main>
+            <aside class="col-md-4">
+                <div class="card">
+                    <div class="cart-total mb-3">
+                    <h3>Cart Totals</h3>
+                    <p class="d-flex">
+                        <span>Subtotal</span>
+                        <span>&#8377;{{ total }}</span>
+                    </p>
+                    <p class="d-flex">
+                        <span>Tax</span>
+                        <span>&#8377;{{ tax }}</span>
+                    </p>
+                    
+                    <hr>
+                    <p class="d-flex total-price">
+                        <span>Total</span>
+                        <span>&#8377;{{ grand_total }}</span>
+                    </p>
+                    <hr>
+                    <p class="text-center mb-3">
+                        <img src="{% static 'images/payments.png' %}" height="26">
+                    </p>
+                    <button type="submit" name="submit" class="btn btn-primary btn-block">Place Order</button>
+                </div>
+				</form>
+                </div> <!-- card.// -->
+            </aside> <!-- col.// -->
+        </div>
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,193 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block content %}
+
+
+  <section class="ftco-section">
+      <div class="container">
+          <div class="row">
+              <div class="col-lg-6 mb-5 ftco-animate">
+                  <a href="#" class="image-popup"><img src="{{ single_product.images.url }}" class="img-fluid"></a>
+              </div>
+              
+              <div class="col-lg-6 product-details pl-md-5 ftco-animate">
+                  <h1>{{ single_product.product_name }}</h1>
+                  <div class="rating d-flex">
+                          <p class="text-left mr-4">
+                              <a href="#" class="mr-2">5.0</a>
+                              <a href="#"><span class="ion-ios-star-outline"></span></a>
+                              <a href="#"><span class="ion-ios-star-outline"></span></a>
+                              <a href="#"><span class="ion-ios-star-outline"></span></a>
+                              <a href="#"><span class="ion-ios-star-outline"></span></a>
+                              <a href="#"><span class="ion-ios-star-outline"></span></a>
+                          </p>
+                          <p class="text-left mr-4">
+                              <a href="#" class="mr-2" style="color: #000;">100 <span style="color: #bbb;">Rating</span></a>
+                          </p>
+                          <p class="text-left">
+                              <a href="#" class="mr-2" style="color: #000;">500 <span style="color: #bbb;">Sold</span></a>
+                          </p>
+                      </div>
+                  <p class="price"><span>&#8377;{{ single_product.price }}</span></p>
+                  <p>{{ single_product.description }}  </p>
+                      <div class="row mt-4">
+                          <!-- <div class="col-md-6">
+                              <div class="form-group d-flex">
+                    <div class="select-wrap">
+                    <div class="icon"><span class="ion-ios-arrow-down"></span></div>
+                    <select name="" id="" class="form-control">
+                        <option value="">Small</option>
+                      <option value="">Medium</option>
+                      <option value="">Large</option>
+                      <option value="">Extra Large</option>
+                    </select>
+                  </div>
+                  </div>
+                          </div> -->
+                          
+                
+            </div>
+            {% if single_product.stock <= 0 %}
+                <h5 class="btn btn-outline-danger">Out of Stock</h5>
+            {% else %}
+            {% if in_cart  %}
+            <h3>Already Added to Cart</h3>
+            
+            <p><a href="{% url 'cart'%}" class="btn btn-black py-3 px-5">View Cart</a></p>
+
+
+            {% else %}
+            <p><a href="{% url 'add_cart' single_product.id %}" class="btn btn-black py-3 px-5">Add to Cart</a></p>
+            {% endif %}
+                {% endif %}
+
+
+                <br><br>
+
+                <div class="row">
+                    <div class="col-md-9">
+        
+            
+                        
+                        <form action="{% url 'submit_review' single_product.id %}" method="POST">
+                            {% csrf_token %}
+                            <input type="hidden" name="product_id" value="{{ single_product.id }}">
+                            <h5>Write Your Review</h5>
+                <div>
+                    <label>Rate this Product</label><br>
+                    <div class="rate">
+                        <input type="radio" name="rating" id="rating10" value="5" required /><label for="rating10" title="5"></label>
+                        <input type="radio" name="rating" id="rating9" value="4.5" required /><label for="rating9" title="4.5" class="half"></label>
+                        <input type="radio" name="rating" id="rating8" value="4" required /><label for="rating8" title="4"></label>
+                        <input type="radio" name="rating" id="rating7" value="3.5" required /><label for="rating7" title="3.5" class="half"></label>
+                        <input type="radio" name="rating" id="rating6" value="3" required /><label for="rating6" title="3"></label>
+                        <input type="radio" name="rating" id="rating5" value="2.5" required /><label for="rating5" title="2.5" class="half"></label>
+                        <input type="radio" name="rating" id="rating4" value="2" required /><label for="rating4" title="2"></label>
+                        <input type="radio" name="rating" id="rating3" value="1.5" required /><label for="rating3" title="1.5" class="half"></label>
+                        <input type="radio" name="rating" id="rating2" value="1" required /><label for="rating2" title="1"></label>
+                        <input type="radio" name="rating" id="rating1" value="0.5" required /><label for="rating1" title="0.5" class="half"></label>
+
+                    </div>
+                    <br>
+                    Review Title:
+                    <input type="text" class="form-control" name="subject">
+                    <br>
+                    Review:
+                    <textarea name="review" rows="4" class="form-control"></textarea>
+                    <br>
+                    {% if user.is_authenticated %}
+                    <input type="submit" value="Submit Review" class="btn btn-primary">
+                    {% else %}
+                    <p>You must be logged in to post a review! <span><a href="{% url 'login' %}">Login now</a></span></p>
+                    {% endif %}
+                </div>
+                {% include 'includes/alerts.html' %}
+            </form>
+        <br>
+            </div> <!-- col.// -->
+        </div> <!-- row.// -->
+        </div>
+    
+          </div>
+          <!-- <header class="section-heading">
+            <h3>Customer Reviews </h3>  
+            
+        </header>
+            <article class="box mb-3">
+                <div class="icontext w-100">
+                    <img src="./images/avatars/avatar1.jpg" class="img-xs icon rounded-circle">
+                    <div class="text">
+                        <span class="date text-muted float-md-right">24.04.2020 </span>  
+                        <h6 class="mb-1">Mike John </h6>
+                        
+                    </div>
+                </div> 
+                <div class="mt-3">
+                    <p>
+                        Dummy comment Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                        quis nostrud exercitation ullamco laboris nisi ut aliquip
+                    </p>	
+                </div>
+            </article> -->
+      </div>
+  </section>
+
+  <section class="ftco-section">
+      <div class="container">
+              <div class="row justify-content-center mb-3 pb-3">
+        <div class="col-md-12 heading-section text-center ftco-animate">
+            <span class="subheading">Products</span>
+          <h2 class="mb-4">More Products</h2>
+          <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia</p>
+        
+        
+        
+        </div>
+        
+      </div>   		
+
+
+      
+      </div>
+      <div class="container">
+          <div class="row">
+            {% for related_products in related_products %}
+              <div class="col-md-6 col-lg-3 ftco-animate">
+                  <div class="product">
+                      <a href="#" class="img-prod"><img class="img-fluid" src="{{ related_products.images.url }}">
+                          <span class="status">30%</span>
+                          <div class="overlay"></div>
+                      </a>
+                      <div class="text py-3 pb-4 px-3 text-center">
+                          <h3><a href="#">{{ related_products.product_name }}</a></h3>
+                          <div class="d-flex">
+                              <div class="pricing">
+                                  <p class="price"><span class="mr-2 price-dc">&#8377;120.00</span><span class="price-sale">&#8377;{{ related_products.price }}</span></p>
+                              </div>
+                          </div>
+                          <div class="bottom-area d-flex px-3">
+                              <div class="m-auto d-flex">
+                                <a href="" class="add-to-cart d-flex justify-content-center align-items-center text-center">
+                                    <span><i class="ion-ios-cart"></i></span>
+                                </a>
+                                
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              
+              {% endfor %}
+              
+
+
+
+
+          </div>
+      </div>
+  </section>
+
+{% endblock %}
