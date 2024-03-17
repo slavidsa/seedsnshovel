@@ -150,12 +150,12 @@ MESSAGE_TAGS = {
     messages.ERROR: "danger",
 }
 
-EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST = 'email_host'
 EMAIL_PORT = 587
-EMAIL_HOST_USER = 'valid_email'
-EMAIL_HOST_PASSWORD = 'your password'
+EMAIL_HOST_USER = 'your_email'
+EMAIL_HOST_PASSWORD = 'your_host_password'
 EMAIL_USE_TLS = True
 
 
-KEY='razor_pay_key'
-SECRET = 'secret_key'
+KEY='your_key'
+SECRET = 'your_secret_key'
