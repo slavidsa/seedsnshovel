@@ -152,10 +152,10 @@ MESSAGE_TAGS = {
 
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
-EMAIL_HOST_USER = 'seedsnshovel@gmail.com'
-EMAIL_HOST_PASSWORD = 'tbqo keuo pvkz xrgb'
+EMAIL_HOST_USER = 'valid_email'
+EMAIL_HOST_PASSWORD = 'your password'
 EMAIL_USE_TLS = True
 
 
-KEY='rzp_test_jymKzvu6nme9CP'
-SECRET = 'fbu6Qu2dSOrR8aG4AUGJzNEl'
+KEY='razor_pay_key'
+SECRET = 'secret_key'
